@@ -1,0 +1,6 @@
+<?xml version = "1.0"?>
+<project name = "Hello World Project" default = "info" >
+	<target name = "info">
+		<echo>Hello world - welcome to the ant tutorial </echo>
+	</target>
+</project>
