@@ -3,4 +3,34 @@
 	<target name = "info">
 		<echo>Hello world - welcome to the ant tutorial </echo>
 	</target>
+
+	<!-- Setting custom properties -->
+	<property name = "sitename" value = "https://sunilkhuwal.wordpress.com/2017/06/04/3ds-restro-lounge-visit/"/>
+	<target name = "siteInfo">
+		<echo>Apache Ant version is ${ant.version} - You are at ${sitename} </echo>
+	</target>
+
+	<property file = "build.properties"/>
+	<!-- Using external properties file-->
+	<target name="siteInfoUsingPropertyFile">
+		<echo>Build Version of this demo project is : ${buildversion}</echo>
+		<echo>You are at ${sitename}</echo>
+	</target>
+	
+	
+	<!-- Printing predefined properties of ant -->
+	<target name = "preDefinedPropertiesOfAnt">
+		<antcall target="siteInfo"/>
+		
+		<echo>Pre defined properties of Ant is here</echo>
+		<echo>The full location of the build file --> ${ant.file}</echo>
+		<echo>The basedir of the build, as specified in the basedir attribute of the project element--> ${basedir}</echo>
+		<echo>The version of the JDK that is used by Ant --> ${ant.java.version}</echo>
+		<echo>The name of the project, as specified in the name atrribute of the project element --> ${ant.project.name}</echo>
+		<echo>The default target of the current project --> ${ant.project.default-target} </echo>
+		<echo>Comma separated list of the targets that were invoked in the current project --> ${ant.project.invoked-targets}</echo>
+		<echo>The full location of the Ant jar file --> ${ant.core.lib}</echo>
+		<echo>The home directory of ant installation --> ${ant.home}</echo>
+		<echo>The home directory for Ant library files - typically ANT_HOME/lib folder --> ${ant.library.dir}</echo>
+	</target>
 </project>

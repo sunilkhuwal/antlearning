@@ -5,3 +5,10 @@ info:
 
 BUILD SUCCESSFUL
 Total time: 0 seconds
+Buildfile: D:\Sunil_Kumar\antRepo\build.xml
+
+info:
+     [echo] Hello world - welcome to the ant tutorial 
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
