@@ -33,4 +33,64 @@
 		<echo>The home directory of ant installation --> ${ant.home}</echo>
 		<echo>The home directory for Ant library files - typically ANT_HOME/lib folder --> ${ant.library.dir}</echo>
 	</target>
+
+	<!-- Example of files
+		0: casesensitive = yes 
+		1: Includes file ends with .java
+		2: Exclues file containing Stubs
+
+		Note: ? − Matches one character only.
+		* − Matches zero or many characters.
+		** − Matches zero or many directories recursively.
+
+		In the below example  Samplestub.java  will not be excluded as we are excluding the file containing 'Stub' as string 
+	-->
+	<fileset dir = "${src}" casesensitive = "yes">
+		<include name = "**/*.java"/>
+		<exclude name = "**/*Stub*"/>
+	</fileset>
+
+	<patternset id="java.files.without.stub">
+		<include name="src/**/*.java"/>
+		<exclue name="src/**/*Stub*"/>
+	</pattternset>
+
+	<fileset dir = ${src} casesensitive="yes">
+		<patternset id="java.files.without.stub"/>
+	</fileset>
+
+	<!-- Note:
+		- filelist contains explicitly named lists of files and it does not support wild cards.
+		- filelist data type can be applied for existing or non-existing files.
+	-->
+	<filelist id = "config.files" dir = "${webapp.src.folder}">
+		<file name = "applicationConfig.xml"/>
+		<file name = "faces-config.xml"/>
+		<file name = "web.xml"/>
+		<file name = "portlet.xml"/>
+	</filelist>
+
+	<!-- Notes:
+		- The attribute output.dir points to the output folder of the project.
+		- The attribute releasenotes.dir points to the release notes folder of the project.
+		- The attribute current.version points to the current version folder of the project.
+		- The copy task, as the name suggests, is used to copy files from one location to another.
+	-->
+	<copy todir = "${output.dir}">
+		<fileset dir = "${releasenotes.dir}" includes = "**/*.txt"/>
+		<filterset>
+			<filter token = "VERSION" value = "${current.version}"/>
+		</filterset>
+	</copy>
+
+	<!-- Notes:
+		- The attribute env.J2EE_HOME points to the environment variable J2EE_HOME.
+		- The attribute j2ee.jar points to the name of the J2EE jar file in the J2EE base folder.
+	-->
+	<path id = "build.classpath.jar">
+		<pathelement path = "${env.J2EE_HOME}/${j2ee.jar}"/>
+		<fileset dir = "lib">
+			<include name = "**/*.jar"/>
+		</fileset>
+	</path>
 </project>
